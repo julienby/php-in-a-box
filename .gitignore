@@ -1,0 +1,48 @@
+# Dépendances Composer
+/vendor/
+composer.lock
+
+# Fichiers de cache
+*.cache
+.cache/
+
+# Fichiers de log
+*.log
+logs/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*~
+
+# Fichiers de configuration locaux
+.env
+.env.local
+.env.*.local
+
+# Fichiers de base de données
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers de backup
+*.bak
+*.backup
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de test
+.phpunit.result.cache
+coverage/
+
+# Fichiers de build
+dist/
+build/ 
