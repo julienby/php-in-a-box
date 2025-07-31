@@ -26,10 +26,10 @@ echo ""
 
 # Vérifier l'état des conteneurs
 echo "🐳 État des conteneurs Docker :"
-if command -v docker-compose &> /dev/null; then
-    docker-compose ps
+if command -v docker &> /dev/null; then
+    ./docker-compose-wrapper.sh ps
 else
-    echo "⚠️  docker-compose non trouvé"
+    echo "⚠️  docker non trouvé"
 fi
 
 echo ""

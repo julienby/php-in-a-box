@@ -15,13 +15,13 @@ if [ ! -d "src" ]; then
 fi
 
 echo "🔄 Arrêt et suppression des conteneurs..."
-docker-compose down --remove-orphans
+./docker-compose-wrapper.sh down --remove-orphans
 
 echo "📦 Mise à jour des images..."
-docker-compose pull
+./docker-compose-wrapper.sh pull
 
 echo "🚀 Démarrage de l'environnement..."
-docker-compose up -d --build --force-recreate
+./docker-compose-wrapper.sh up -d --build --force-recreate
 
 # Afficher les informations du projet
 if [ ! -z "$PROJECT_NAME" ]; then

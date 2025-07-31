@@ -91,13 +91,13 @@ composer require monolog/monolog
 ./info.sh
 
 # Accéder au conteneur
-docker-compose exec php-apache bash
+./docker-compose-wrapper.sh exec php-apache bash
 
 # Voir les logs
-docker-compose logs php-apache
+./docker-compose-wrapper.sh logs php-apache
 
 # Arrêter l'environnement
-docker-compose down
+./docker-compose-wrapper.sh down
 ```
 
 ## ⚙️ Configuration personnalisée
