@@ -1,11 +1,38 @@
 #!/bin/bash
 
-#create src directory if it doesn't exist
-if [ ! -d "src" ]; then
-    mkdir src
+# Charger les variables d'environnement
+if [ -f ".env" ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+    echo "✅ Variables d'environnement chargées depuis .env"
+else
+    echo "⚠️  Fichier .env non trouvé, utilisation des valeurs par défaut"
 fi
 
-echo "Stopping and removing containers..."
+# Créer le dossier src s'il n'existe pas
+if [ ! -d "src" ]; then
+    mkdir src
+    echo "📁 Dossier src créé"
+fi
+
+echo "🔄 Arrêt et suppression des conteneurs..."
 docker-compose down --remove-orphans
+
+echo "📦 Mise à jour des images..."
 docker-compose pull
+
+echo "🚀 Démarrage de l'environnement..."
 docker-compose up -d --build --force-recreate
+
+# Afficher les informations du projet
+if [ ! -z "$PROJECT_NAME" ]; then
+    echo ""
+    echo "✅ Environnement démarré avec succès !"
+    echo "📋 Projet: $PROJECT_NAME"
+    echo "🌐 URL: http://localhost:${EXPOSE_PORT:-7080}"
+    echo "🐳 Image: ${DOCKER_IMAGE_NAME:-php-in-a-box-image}"
+    echo "📦 Conteneur: ${DOCKER_CONTAINER_NAME:-php-in-a-box-container}"
+else
+    echo ""
+    echo "✅ Environnement démarré avec succès !"
+    echo "🌐 URL: http://localhost:7080"
+fi

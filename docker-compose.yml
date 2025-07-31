@@ -1,10 +1,20 @@
 services:
   php-apache:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKER_IMAGE_NAME:-php-in-a-box-image}
+    container_name: ${DOCKER_CONTAINER_NAME:-php-in-a-box-container}
     ports:
-      - "7080:80"
+      - "${EXPOSE_PORT:-7080}:80"
     volumes:
       - ./src:/var/www/html
     environment:
       PHP_EXTENSION_DIR: "/usr/local/lib/php/extensions/no-debug-non-zts-20180731"
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-256M}
+      PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-300}
+      PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-100M}
+      PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-100M}
+      DEBUG_MODE: ${DEBUG_MODE:-true}
+      DISPLAY_ERRORS: ${DISPLAY_ERRORS:-true}
     restart: always

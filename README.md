@@ -19,13 +19,19 @@ Environnement PHP Docker complet pour le développement de projets.
    cd php-in-a-box
    ```
 
-2. **Lancer l'environnement** :
+2. **Configurer le projet** (optionnel) :
+   ```bash
+   ./setup.sh
+   ```
+   Ce script vous permet de personnaliser le nom du projet et le port.
+
+3. **Lancer l'environnement** :
    ```bash
    ./update.sh
    ```
 
-3. **Accéder à l'application** :
-   Ouvrez votre navigateur sur `http://localhost:7080`
+4. **Accéder à l'application** :
+   Ouvrez votre navigateur sur `http://localhost:7080` (ou le port configuré)
 
 ## 📁 Structure du projet
 
@@ -37,9 +43,12 @@ php-in-a-box/
 ├── Dockerfile             # Image Docker personnalisée
 ├── php.ini               # Configuration PHP
 ├── composer.json         # Dépendances PHP
+├── .env.example          # Modèle de configuration
 ├── .dockerignore         # Optimisation des builds
 ├── .gitignore           # Fichiers à ignorer
-└── update.sh            # Script de mise à jour
+├── setup.sh             # Script de configuration
+├── update.sh            # Script de mise à jour
+└── info.sh              # Script d'information
 ```
 
 ## 🔧 Configuration
@@ -72,8 +81,14 @@ composer require monolog/monolog
 ## 🛠️ Commandes utiles
 
 ```bash
-# Redémarrer l'environnement
+# Configurer le projet (nom, port, etc.)
+./setup.sh
+
+# Démarrer/redémarrer l'environnement
 ./update.sh
+
+# Voir les informations du projet
+./info.sh
 
 # Accéder au conteneur
 docker-compose exec php-apache bash
@@ -83,6 +98,20 @@ docker-compose logs php-apache
 
 # Arrêter l'environnement
 docker-compose down
+```
+
+## ⚙️ Configuration personnalisée
+
+Le projet utilise des variables d'environnement pour personnaliser :
+- **Nom du projet** : Nom de l'image et du conteneur Docker
+- **Port d'exposition** : Port d'accès à l'application
+- **Configuration PHP** : Limites mémoire, timeout, etc.
+
+Exemple de fichier `.env` :
+```bash
+PROJECT_NAME=mon-projet
+EXPOSE_PORT=8080
+PHP_MEMORY_LIMIT=512M
 ```
 
 ## 🧪 Tests
