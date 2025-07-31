@@ -24,15 +24,9 @@ echo "🚀 Démarrage de l'environnement..."
 ./docker-compose-wrapper.sh up -d --build --force-recreate
 
 # Afficher les informations du projet
-if [ ! -z "$PROJECT_NAME" ]; then
-    echo ""
-    echo "✅ Environnement démarré avec succès !"
-    echo "📋 Projet: $PROJECT_NAME"
-    echo "🌐 URL: http://localhost:${EXPOSE_PORT:-7080}"
-    echo "🐳 Image: ${DOCKER_IMAGE_NAME:-php-in-a-box-image}"
-    echo "📦 Conteneur: ${DOCKER_CONTAINER_NAME:-php-in-a-box-container}"
-else
-    echo ""
-    echo "✅ Environnement démarré avec succès !"
-    echo "🌐 URL: http://localhost:7080"
-fi
+echo ""
+echo "✅ Environnement démarré avec succès !"
+echo "📋 Projet: ${PROJECT_NAME:-php-in-a-box}"
+echo "🌐 URL: http://localhost:${EXPOSE_PORT:-7080}"
+echo "🐳 Image: ${DOCKER_IMAGE_NAME:-php-in-a-box-image}"
+echo "📦 Conteneur: ${DOCKER_CONTAINER_NAME:-php-in-a-box-container}"
